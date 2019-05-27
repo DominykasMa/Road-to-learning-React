@@ -8,7 +8,7 @@ const list = [
     author: "Jordan Walke",
     num_comments: 3,
     points: 4,
-    objectId: 0,
+    objectID: 0,
   },
   {
     title: "Redux",
@@ -27,6 +27,7 @@ const list = [
     objectId: 2,
   },
 ];
+
 
 class App extends Component {
   constructor(props) {
