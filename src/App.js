@@ -16,7 +16,7 @@ const list = [
     author: "Dan Abramov, Andrew Clark",
     num_comments: 2,
     points: 5,
-    objectId: 1,
+    objectID: 1,
   },
   {
     title: "Redux",
@@ -24,7 +24,7 @@ const list = [
     author: "Dan Abramov, Andrew Clark",
     num_comments: 2,
     points: 5,
-    objectId: 2,
+    objectID: 2,
   },
 ];
 
@@ -35,13 +35,14 @@ class App extends Component {
 
     this.state = {
       list,
+      appName : 'Road to learning React'
     };
 
     this.onDismiss = this.onDismiss.bind(this);
   }
 
   onDismiss(id) {
-    const isNotId = item => item.objectId !== id;
+    const isNotId = item => item.objectID !== id;
     const updatedList = this.state.list.filter(isNotId);
     this.setState({ list: updatedList });
   }    
@@ -49,8 +50,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <h1>{this.state.appName}</h1>
         {this.state.list.map(item => (
-          <div key={item.objectId}>
+          <div key={item.objectID}>
             <span>
               <a href={item.url}>{item.title}</a>
             </span>
@@ -59,7 +61,7 @@ class App extends Component {
             <span>{item.points}</span>
             <span>
             <button
-                onClick={() => this.onDismiss(item.objectId)}
+                onClick={() => this.onDismiss(item.objectID)}
                 type="button"
               >
                 Dismiss
