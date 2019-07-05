@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
+import { Button, Checkbox, Form, Input } from 'semantic-ui-react'
 
 const list = [
   {
@@ -60,7 +61,6 @@ class App extends Component {
       <div className="App">
         <h1>{this.state.appName}</h1>
         <Search value={searchTerm} onChange={this.onSearchChange}>
-          Search
         </Search>
         <Table list={list} pattern={searchTerm} onDismiss={this.onDismiss} />
       </div>
@@ -72,10 +72,10 @@ class Search extends Component {
   render() {
     const { value, onChange, children } = this.props;
     return (
-      <form>
+      <Form>
         {children}
-        <input type="text" value={value} onChange={onChange} />
-      </form>
+        <Input className={'searchInput'} placeholder={'Search'} type={'text'} value={value} onChange={onChange} />
+      </Form>
     );
   }
 }
@@ -84,19 +84,26 @@ class Table extends Component {
   render() {
     const { list, pattern, onDismiss } = this.props;
     return (
-      <div>
+      <div className={'list'}>
+        <div className={'listHeader'}>
+         <span className={'table-cell'}>Title</span>
+          <span className={'table-cell'}>Author</span>
+          <span className={'table-cell'}>Comments</span>
+          <span className={'table-cell'}>Points</span>
+          <span className={'table-cell'}>Action</span>
+        </div>
         {list.filter(isSearched(pattern)).map(item => (
-          <div key={item.objectID}>
-            <span>
+          <div className={'listItem'} key={item.objectID}>
+            <span className={'table-cell'}>
               <a href={item.url}>{item.title}</a>
             </span>
-            <span>{item.author}</span>30
-            <span>{item.num_comments}</span>
-            <span>{item.points}</span>
-            <span>
-              <button onClick={() => onDismiss(item.objectID)} type="button">
+            <span className={'table-cell'}>{item.author}</span>
+            <span className={'table-cell'}>{item.num_comments}</span>
+            <span className={'table-cell'}>{item.points}</span>
+            <span className={'table-cell'}>
+              <ButtonDelete onClick={() => onDismiss(item.objectID)} type="button">
                 Dismiss
-              </button>
+              </ButtonDelete>
             </span>
           </div>
         ))}
@@ -104,5 +111,25 @@ class Table extends Component {
     );
   }
 }
+
+class ButtonDelete extends Component {
+  render() {
+    const {
+      onClick,
+      className,
+      children,
+    } = this.props;
+    return (
+        <Button
+            onClick={onClick}
+            className={className}
+            type="button"
+        >
+          {children}
+        </Button>
+    );
+  }
+}
+
 
 export default App;
