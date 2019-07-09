@@ -1,6 +1,7 @@
 import React, { Component } from "react";
+import { Button, Checkbox, Form, Input, Icon } from 'semantic-ui-react'
 import "./App.css";
-import { Button, Checkbox, Form, Input } from 'semantic-ui-react'
+import 'animate.css/animate.min.css'
 
 const list = [
   {
@@ -39,11 +40,13 @@ class App extends Component {
     this.state = {
       list,
       appName: "Road to learning React",
-      searchTerm: ""
+      searchTerm: "",
+      visibility: false
     };
 
     this.onDismiss = this.onDismiss.bind(this);
     this.onSearchChange = this.onSearchChange.bind(this);
+    this.toggleVisibility = this.toggleVisibility.bind(this);
   }
 
   onSearchChange(event) {
@@ -55,13 +58,20 @@ class App extends Component {
     const updatedList = this.state.list.filter(isNotId);
     this.setState({ list: updatedList });
   }
+
+  toggleVisibility(){
+    this.setState({
+      visibility: !this.state.visibility
+    })
+  }
+
   render() {
     const { searchTerm, list } = this.state;
     return (
       <div className="App">
-        <h1>{this.state.appName}</h1>
-        <Search value={searchTerm} onChange={this.onSearchChange}>
-        </Search>
+        <h1 className={'title'}>{this.state.appName}</h1>
+        <SearchIcon onClick={this.toggleVisibility}/>
+        {this.state.visibility && <Search value={searchTerm} onChange={this.onSearchChange}/>}
         <Table list={list} pattern={searchTerm} onDismiss={this.onDismiss} />
       </div>
     );
@@ -72,9 +82,9 @@ class Search extends Component {
   render() {
     const { value, onChange, children } = this.props;
     return (
-      <Form>
+        <Form>
         {children}
-        <Input className={'searchInput'} placeholder={'Search'} type={'text'} value={value} onChange={onChange} />
+        <Input className={'searchInput fadeInDown'} placeholder={'Search'} type={'text'} value={value} onChange={onChange} />
       </Form>
     );
   }
@@ -113,20 +123,39 @@ class Table extends Component {
 }
 
 class ButtonDelete extends Component {
+
   render() {
     const {
       onClick,
       className,
       children,
     } = this.props;
+
     return (
+
         <Button
             onClick={onClick}
             className={className}
             type="button"
+            color="black"
         >
           {children}
         </Button>
+    );
+  }
+}
+
+class SearchIcon extends Component {
+
+  render() {
+    const {
+      onClick,
+    } = this.props;
+
+    return (
+        <button onClick={onClick} className={'btn'} type="button">
+          <Icon name="search" size="large"/>
+        </button>
     );
   }
 }

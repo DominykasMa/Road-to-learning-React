@@ -20,7 +20,12 @@
 }
 
 .App-link {
-  color: #61dafb;
+  color: #ffffff;
+}
+
+a{
+  color: #ffffff;
+  text-decoration: underline;
 }
 
 .listItem,
@@ -35,7 +40,7 @@
   display: flex;
   flex-direction: column;
   width: 500px;
-  margin: auto;
+  margin: 10px auto;
 }
 
 .searchInput {
@@ -48,7 +53,32 @@
   overflow: hidden;
   list-style: none;
   width: 25%;
+  color: #ffffff;
 
+}
+
+.title {
+  padding-top: 10px;
+  font-size: 50px;
+  color: #ffffff;
+}
+
+.btn{
+  background-image: linear-gradient(rgba(123, 93, 233, 0.596),rgba(20, 97, 240, 0.733));
+  color: whitesmoke;
+  font-size: 1vw;
+  border-style: solid;
+  border-color: aliceblue;
+  border-width: 0.25vw;
+  border-radius: 10vw;
+  height: 4vw;
+  width: 4vw;
+  text-decoration: none;
+  margin-bottom: 10px;
+}
+
+.fadeInDown {
+  animation-duration: 2s;
 }
 
 
